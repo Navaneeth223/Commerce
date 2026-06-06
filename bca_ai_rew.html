@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCA in AI, Cloud & DevOps Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+    <style>
+        :root {
+            --bg-main: #0b0b0f;
+            --bg-card: #12121a;
+            --bg-card-hover: #171722;
+            --border: rgba(255, 255, 255, 0.07);
+            
+            --text-primary: #f3f4f6;
+            --text-secondary: #9ca3af;
+            
+            --accent-blue: #38bdf8;
+            --accent-teal: #2dd4bf;
+            --accent-amber: #fbbf24;
+            --accent-purple: #a78bfa;
+            --accent-red: #f87171;
+            
+            --glow-blue: rgba(56, 189, 248, 0.15);
+            --glow-teal: rgba(45, 212, 191, 0.15);
+            --glow-amber: rgba(251, 191, 36, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        /* Hero Header */
+        .hero {
+            position: relative;
+            background: linear-gradient(135deg, #161624 0%, #111119 100%);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem 2rem;
+            margin-bottom: 3rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.2) 0%, transparent 70%);
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            padding: 6px 14px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #fff, #9ca3af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .h-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border);
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .h-pill i {
+            color: var(--accent-teal);
+        }
+
+        /* Section Styling */
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            margin: 3.5rem 0 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-title i {
+            color: var(--accent-blue);
+        }
+
+        /* Grid Layouts */
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .grid-2 { grid-template-columns: 1fr; }
+        }
+
+        /* Core Cards */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            background: var(--bg-card-hover);
+            border-color: rgba(255,255,255,0.12);
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .card-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-desc {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* Custom Colors for Core Specs */
+        .c-ai { border-top: 4px solid var(--accent-blue); box-shadow: 0 10px 30px var(--glow-blue); }
+        .c-ai .card-icon { background: rgba(56, 189, 248, 0.1); color: var(--accent-blue); }
+        
+        .c-cloud { border-top: 4px solid var(--accent-teal); box-shadow: 0 10px 30px var(--glow-teal); }
+        .c-cloud .card-icon { background: rgba(45, 212, 191, 0.1); color: var(--accent-teal); }
+        
+        .c-devops { border-top: 4px solid var(--accent-amber); box-shadow: 0 10px 30px var(--glow-amber); }
+        .c-devops .card-icon { background: rgba(251, 191, 36, 0.1); color: var(--accent-amber); }
+
+        /* Summary Banner */
+        .summary-banner {
+            background: rgba(45, 212, 191, 0.03);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            padding: 1.25rem 1.75rem;
+            border-radius: 12px;
+            margin-top: 1.5rem;
+            font-size: 14px;
+            color: var(--text-primary);
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .summary-banner i { color: var(--accent-teal); font-size: 1.5rem; }
+
+        /* Year Timeline Cards */
+        .year-card {
+            background: linear-gradient(180deg, #141420 0%, #0e0e16 100%);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: left;
+        }
+        .year-label {
+            font-weight: 700;
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+            display: inline-block;
+            background: rgba(56, 189, 248, 0.08);
+            padding: 2px 10px;
+            border-radius: 4px;
+        }
+        .year-list {
+            list-style: none;
+        }
+        .year-list li {
+            font-size: 13.5px;
+            color: var(--text-primary);
+            padding: 6px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .year-list li::before {
+            content: "•";
+            color: var(--accent-blue);
+            font-weight: bold;
+        }
+
+        /* Salary Visualizer */
+        .salary-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+        }
+        .salary-row {
+            margin-bottom: 1.5rem;
+        }
+        .salary-row:last-child { margin-bottom: 0; }
+        .salary-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+        .salary-title { font-weight: 500; color: var(--text-primary); }
+        .salary-amount { font-weight: 600; color: var(--accent-teal); }
+        .progress-bar-bg {
+            background: rgba(255,255,255,0.05);
+            height: 10px;
+            border-radius: 100px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--accent-blue), var(--accent-teal));
+            border-radius: 100px;
+        }
+
+        /* Lists blocks */
+        .job-list {
+            list-style: none;
+        }
+        .job-list li {
+            font-size: 13.5px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .job-list li:last-child { border-bottom: none; }
+        .job-name { display: flex; align-items: center; gap: 8px; }
+        .job-name i { color: var(--accent-teal); }
+        .job-pay { font-weight: 600; color: var(--text-primary); background: rgba(255,255,255,0.04); padding: 2px 8px; border-radius: 4px; font-size: 12px;}
+
+        /* Alert Callout */
+        .alert-callout {
+            background: rgba(248, 113, 113, 0.07);
+            border: 1px solid rgba(248, 113, 113, 0.2);
+            border-left: 4px solid var(--accent-red);
+            padding: 1.25rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            color: #fca5a5;
+        }
+        .alert-callout i { font-size: 1.5rem; color: var(--accent-red); }
+
+        /* College Analytics Metrics */
+        .college-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 1rem 0;
+        }
+        .metric-box {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            padding: 8px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .metric-label { font-size: 10px; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.5px;}
+        .metric-val { font-size: 13px; font-weight: 600; color: var(--text-primary); margin-top: 2px; }
+
+        /* Action Steps */
+        .step-block {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 1.25rem;
+            background: var(--bg-card);
+            padding: 1.25rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            align-items: flex-start;
+        }
+        .step-number {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-blue);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+        .step-text h4 { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+        .step-text p { font-size: 13px; color: var(--text-secondary); }
+
+        /* Final Verdict Box */
+        .verdict-box {
+            background: linear-gradient(135deg, rgba(45, 212, 191, 0.05) 0%, rgba(56, 189, 248, 0.05) 100%);
+            border: 1px solid rgba(45, 212, 191, 0.2);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: center;
+        }
+        .verdict-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--accent-teal);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <header class="hero">
+        <div class="hero-content">
+            <div class="hero-badge"><i class="ti ti-flame"></i> Top Trending Course 2026</div>
+            <h1>BCA with AI + Cloud Computing + DevOps</h1>
+            <p>A comprehensive, future-proof 3-year degree engineered for high-end deployment roles. Open to all streams—no higher math required, commerce backgrounds accepted seamlessly.</p>
+            
+            <div class="hero-features">
+                <div class="h-pill"><i class="ti ti-calendar"></i> 3 Years Duration</div>
+                <div class="h-pill"><i class="ti ti-math-off"></i> No Algebra/Calculus</div>
+                <div class="h-pill"><i class="ti ti-briefcase"></i> Direct Tech Placements</div>
+            </div>
+        </div>
+    </header>
+
+    <h2 class="section-title"><i class="ti ti-box"></i> What is this course?</h2>
+    <div class="grid-3">
+        <div class="card c-ai">
+            <div class="card-header">
+                <div class="card-icon"><i class="ti ti-brain"></i></div>
+            </div>
+            <div class="card-title">Artificial Intelligence</div>
+            <div class="card-desc">Build and scale predictive frameworks. Learn the engineering architectures driving LLMs (like ChatGPT), algorithmic recommendations, and autonomous vision systems.</div>
+        </div>
+        
+        <div class="card c-cloud">
+            <div class="card-header">
+                <div class="card-icon"><i class="ti ti-cloud"></i></div>
+            </div>
+            <div class="card-title">Cloud Computing</div>
+            <div class="card-desc">The structural backend of global platforms. Master structural operations across AWS, Microsoft Azure, and GCP architecture to deploy production-level code.</div>
+        </div>
+        
+        <div class="card c-devops">
+            <div class="card-header">
+                <div class="card-icon"><i class="ti ti-settings-automation"></i></div>
+            </div>
+            <div class="card-title">DevOps Infrastructure</div>
+            <div class="card-desc">The automation engine linking developers to servers. Package, orchestrate, and deliver software updates instantly using enterprise workflows like Docker and Kubernetes.</div>
+        </div>
+    </div>
+
+    <div class="summary-banner">
+        <i class="ti ti-info-circle"></i>
+        <div><strong>The Modern Stack Trinity:</strong> AI structures the decision framework, Cloud hosts the system environment, and DevOps manages continuous scalable updates.</div>
+    </div>
+
+    <h2 class="section-title"><i class="ti ti-timeline"></i> Year-by-Year Curriculum Mapping</h2>
+    <div class="grid-3">
+        <div class="year-card">
+            <span class="year-label">Year 01</span>
+            <ul class="year-list">
+                <li>Programming (Python / C)</li>
+                <li>Database Architecture (SQL)</li>
+                <li>Computer Networks</li>
+                <li>Modern Web Dev (HTML/CSS/JS)</li>
+                <li>OS & Core System Logic</li>
+            </ul>
+        </div>
+        <div class="year-card">
+            <span class="year-label" style="color: var(--accent-teal); background: rgba(45, 212, 191, 0.08);">Year 02</span>
+            <ul class="year-list">
+                <li>Machine Learning Frameworks</li>
+                <li>AWS / Azure Cloud Ops</li>
+                <li>Docker Containerization</li>
+                <li>CI/CD Deployment Pipelines</li>
+                <li>Data Structures & Algorithms</li>
+            </ul>
+        </div>
+        <div class="year-card">
+            <span class="year-label" style="color: var(--accent-amber); background: rgba(251, 191, 36, 0.08);">Year 03</span>
+            <ul class="year-list">
+                <li>Advanced Large AI Models</li>
+                <li>Kubernetes Orchestration</li>
+                <li>Full-Scale Production Pipelines</li>
+                <li>Enterprise Architecture Design</li>
+                <li>Industry Project & Internship</li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="section-title"><i class="ti ti-chart-bar"></i> Industry Salary Trajectory</h2>
+    <div class="grid-2">
+        <div class="salary-container">
+            <div class="salary-row">
+                <div class="salary-info">
+                    <span class="salary-title">Fresher (0–1 Years)</span>
+                    <span class="salary-amount">₹3.5 – ₹6.0 LPA</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 25%;"></div></div>
+            </div>
+            <div class="salary-row">
+                <div class="salary-info">
+                    <span class="salary-title">Mid-Level Engineer (2–3 Years)</span>
+                    <span class="salary-amount">₹6.0 – ₹15.0 LPA</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 55%;"></div></div>
+            </div>
+            <div class="salary-row">
+                <div class="salary-info">
+                    <span class="salary-title">Senior Architect / AI Engineer (5+ Years)</span>
+                    <span class="salary-amount">₹15.0 – ₹45.0 LPA</span>
+                </div>
+                <div class="progress-bar-bg"><div class="progress-bar-fill" style="width: 85%;"></div></div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-title" style="font-size: 14px; text-transform: uppercase; color: var(--text-secondary); letter-spacing: 0.5px; margin-bottom: 1rem;">Immediate Job Profiles</div>
+            <ul class="job-list">
+                <li><span class="job-name"><i class="ti ti-circle-check"></i> Cloud Support Engineer</span> <span class="job-pay">₹3.5–6 LPA</span></li>
+                <li><span class="job-name"><i class="ti ti-circle-check"></i> Junior DevOps Engineer</span> <span class="job-pay">₹4–7 LPA</span></li>
+                <li><span class="job-name"><i class="ti ti-circle-check"></i> AI/ML Assistant Architect</span> <span class="job-pay">₹4–8 LPA</span></li>
+                <li><span class="job-name"><i class="ti ti-circle-check"></i> Site Reliability Engineer (SRE)</span> <span class="job-pay">₹18–40 LPA (Exp)</span></li>
+            </ul>
+        </div>
+    </div>
+
+    <h2 class="section-title"><i class="ti ti-certificate"></i> Accelerated Cloud Certifications</h2>
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title"><i class="ti ti-brand-aws" style="color: var(--accent-amber); margin-right: 6px;"></i> AWS Cloud Practitioner</div>
+            <div class="card-desc">Highly requested by infrastructure hiring pipelines. Complete during Year 2 to unlock entry scales between ₹5–8 LPA.</div>
+        </div>
+        <div class="card">
+            <div class="card-title"><i class="ti ti-brand-azure" style="color: var(--accent-blue); margin-right: 6px;"></i> Microsoft Azure (AZ-900)</div>
+            <div class="card-desc">Establishes vital multi-cloud competence. High utility profile pairing with AWS architectures.</div>
+        </div>
+    </div>
+
+    <h2 class="section-title"><i class="ti ti-school"></i> Geographic College Matrix</h2>
+    
+    <div class="alert-callout">
+        <i class="ti ti-alert-triangle"></i>
+        <div><strong>Time-Sensitive:</strong> Kannur University Centralized Allotment Process (CAP) enrollment portals close strictly on <strong>June 12, 2026</strong> via <em>admission.kannuruniversity.ac.in</em>.</div>
+    </div>
+
+    <div class="grid-2">
+        <div class="card">
+            <div class="card-title">Taliparamba Arts & Science College</div>
+            <p style="font-size: 12px; color: var(--accent-teal);">Kanhirangad (Local Commute)</p>
+            <div class="college-meta">
+                <div class="metric-box"><div class="metric-label">Distance</div><div class="metric-val">0 km</div></div>
+                <div class="metric-box"><div class="metric-label">Est. Fees</div><div class="metric-val">₹20k/yr</div></div>
+                <div class="metric-box"><div class="metric-label">Affiliation</div><div class="metric-val">Kannur Univ</div></div>
+            </div>
+            <div class="card-desc">Optimal financial profile. Safe choice allowing immediate local residence and minimal daily overheads.</div>
+        </div>
+        
+        <div class="card">
+            <div class="card-title">Chinmaya Institute of Technology (CIT)</div>
+            <p style="font-size: 12px; color: var(--accent-blue);">Kannur Town</p>
+            <div class="college-meta">
+                <div class="metric-box"><div class="metric-label">Distance</div><div class="metric-val">~30 km</div></div>
+                <div class="metric-box"><div class="metric-label">Est. Fees</div><div class="metric-val">₹2.75L Total</div></div>
+                <div class="metric-box"><div class="metric-label">Rating</div><div class="metric-val">Top Tier</div></div>
+            </div>
+            <div class="card-desc">Highly regarded infrastructure within the Kannur ecosystem. Equipped with modern technology labs.</div>
+        </div>
+
+        <div class="card" style="border: 1px solid rgba(45, 212, 191, 0.3);">
+            <div class="card-title" style="color: var(--accent-teal);">Srinivas University (Specialized Track)</div>
+            <p style="font-size: 12px; color: var(--accent-teal);">Mangalore, Karnataka</p>
+            <div class="college-meta">
+                <div class="metric-box"><div class="metric-label">Profile</div><div class="metric-val" style="font-size: 10px;">Dedicated Spec.</div></div>
+                <div class="metric-box"><div class="metric-label">Est. Fees</div><div class="metric-val">1.18L/yr</div></div>
+                <div class="metric-box"><div class="metric-label">Direct Track</div><div class="metric-val">AI/DevOps Named</div></div>
+            </div>
+            <div class="card-desc">The definitive option for a formal dedicated degree name in AI & DevOps instead of a generic BCA program. Seamless non-math framework admission criteria.</div>
+        </div>
+
+        <div class="card">
+            <div class="card-title">Yenepoya University</div>
+            <p style="font-size: 12px; color: var(--accent-purple);">Mangalore (Microsoft Integrated)</p>
+            <div class="college-meta">
+                <div class="metric-box"><div class="metric-label">Syllabus</div><div class="metric-val" style="font-size: 11px;">MS Integrated</div></div>
+                <div class="metric-box"><div class="metric-label">Est. Fees</div><div class="metric-val">~₹82k/yr</div></div>
+                <div class="metric-box"><div class="metric-label">Placement</div><div class="metric-val">IBM / TCS</div></div>
+            </div>
+            <div class="card-desc">Features integrated tracks mapped natively to global corporate structures and curated partner content.</div>
+        </div>
+    </div>
+
+    <h2 class="section-title"><i class="ti ti-player-play"></i> Immediate Strategic Action Steps</h2>
+    <div>
+        <div class="step-block">
+            <div class="step-number">1</div>
+            <div class="step-text">
+                <h4>Execute University CAP Registers</h4>
+                <p>Prioritize submission profiles at <em>admission.kannuruniversity.ac.in</em> and Calicut University targets immediately before deadline cutoffs.</p>
+            </div>
+        </div>
+        <div class="step-block">
+            <div class="step-number">2</div>
+            <div class="step-text">
+                <h4>File Parallel Forms for Specializations</h4>
+                <p>If looking for a dedicated specialized degree title, initialize applications at Srinivas University online portal to lock eligibility criteria.</p>
+            </div>
+        </div>
+        <div class="step-block">
+            <div class="step-number">3</div>
+            <div class="step-text">
+                <h4>Leverage Industry Micro-Credentials</h4>
+                <p>Regardless of college choice, initialize tracking on free AWS training tracks from Day 1 to scale ahead of peers.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="verdict-box">
+        <div class="verdict-title"><i class="ti ti-circle-check-filled"></i> The Definitive Verdict</div>
+        <p style="font-size: 14px; color: var(--text-secondary); max-width: 800px; margin: 0 auto; line-height: 1.7;">
+            If capital permits (~₹2L/yr containing living overheads), choose <strong>Srinivas University</strong> for the specific custom-tailored curriculum track. If managing strict budget guidelines, select a solid **local Kerala option** (such as CAS Kannur or Chinmaya) and construct equivalent leverage by mapping out your portfolio with free public cloud certifications. Tech industries prioritize verifiable competencies over raw institutional branding.
+        </p>
+    </div>
+
+</div>
+
+</body>
+</html>
