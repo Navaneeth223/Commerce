@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Future Starts Here — Education Guide 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#F7F4EE;--ink:#1A1714;--sage:#4A6741;--sage-light:#EBF0E8;--gold:#C8963E;--gold-light:#FBF3E4;--rose:#B85C4A;--rose-light:#FAF0EE;--slate:#3D5A73;--slate-light:#EAF0F5;--muted:#7A7068;--border:rgba(26,23,20,0.1);--nav-h:60px;--tab-h:64px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--ink);min-height:100vh;overflow-x:hidden}
+
+/* TOP NAV */
+.top-nav{position:fixed;top:0;left:0;right:0;z-index:200;background:rgba(247,244,238,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:var(--nav-h);display:flex;align-items:center;justify-content:space-between;padding:0 2rem}
+.nav-brand{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);text-decoration:none;white-space:nowrap}
+.nav-brand span{color:var(--sage)}
+.nav-links{display:flex;gap:.2rem;list-style:none}
+.nav-links a{text-decoration:none;font-size:.82rem;font-weight:500;color:var(--muted);padding:6px 14px;border-radius:999px;transition:all .2s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.active{background:var(--ink);color:var(--cream)}
+
+/* BOTTOM TAB BAR (mobile) */
+.tab-bar{display:none;position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(247,244,238,.97);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--border);height:var(--tab-h);align-items:stretch}
+.tab-btn{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:none;border:none;cursor:pointer;padding:6px 4px;transition:all .18s;-webkit-tap-highlight-color:transparent}
+.tab-btn .tab-icon{font-size:1.25rem;line-height:1}
+.tab-btn .tab-label{font-size:.62rem;font-weight:500;color:var(--muted);letter-spacing:.02em;transition:color .18s}
+.tab-btn.active .tab-label{color:var(--sage);font-weight:600}
+.tab-btn.active .tab-icon{transform:translateY(-1px)}
+
+/* PAGES */
+.page{display:none;min-height:100vh;padding-top:calc(var(--nav-h) + 1.5rem);padding-bottom:3rem}
+.page.active{display:block}
+.container{max-width:960px;margin:0 auto;padding:0 1.5rem}
+
+/* HERO */
+.hero-section{padding:2.5rem 0 2rem;text-align:center}
+.hero-tag{display:inline-block;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);background:var(--sage-light);border:1px solid rgba(74,103,65,.2);padding:5px 14px;border-radius:999px;margin-bottom:1.25rem}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,8vw,4rem);font-weight:900;line-height:1.1;color:var(--ink);margin-bottom:1rem}
+.hero-title em{font-style:italic;color:var(--sage)}
+.hero-sub{font-size:.98rem;color:var(--muted);max-width:480px;margin:0 auto 2rem;line-height:1.7}
+
+/* PROFILE PILLS */
+.profile-card{display:flex;flex-wrap:wrap;justify-content:center;gap:.5rem;margin-bottom:2rem}
+.profile-pill{background:white;border:1px solid var(--border);border-radius:999px;padding:.5rem 1.1rem;box-shadow:0 2px 8px rgba(0,0,0,.05);text-align:center}
+.profile-pill-val{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);display:block}
+.profile-pill-label{font-size:.66rem;color:var(--muted);font-weight:500;letter-spacing:.04em;white-space:nowrap}
+
+/* URGENT BANNER */
+.urgent-banner{background:var(--rose);color:white;border-radius:14px;padding:1rem 1.25rem;display:flex;align-items:flex-start;gap:.85rem;margin-bottom:2rem}
+.urgent-dot{width:10px;height:10px;background:white;border-radius:50%;flex-shrink:0;margin-top:5px;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.urgent-text{font-size:.86rem;line-height:1.6}
+.urgent-text strong{font-weight:600}
+.urgent-text a{color:white;font-family:'DM Mono',monospace;font-size:.76rem;word-break:break-all}
+
+/* SECTION HEADER */
+.section-header{margin-bottom:1.5rem}
+.section-eyebrow{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.4rem;display:block}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem,4vw,1.9rem);font-weight:700;color:var(--ink);line-height:1.2}
+
+/* CTA GRID */
+.cta-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:2.5rem}
+.cta-card{background:white;border:1.5px solid var(--border);border-radius:16px;padding:1rem 1rem 1.15rem;cursor:pointer;transition:transform .2s,box-shadow .2s;text-align:left;position:relative;overflow:hidden;-webkit-tap-highlight-color:transparent}
+.cta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:16px 16px 0 0}
+.cta-card.c-sage::before{background:var(--sage)}.cta-card.c-gold::before{background:var(--gold)}.cta-card.c-rose::before{background:var(--rose)}.cta-card.c-slate::before{background:var(--slate)}
+.cta-card:active{transform:scale(.97)}
+.cta-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:.55rem}
+.cta-card.c-sage .cta-icon{background:var(--sage-light)}.cta-card.c-gold .cta-icon{background:var(--gold-light)}.cta-card.c-rose .cta-icon{background:var(--rose-light)}.cta-card.c-slate .cta-icon{background:var(--slate-light)}
+.cta-title{font-weight:600;font-size:.88rem;color:var(--ink);margin-bottom:3px}
+.cta-desc{font-size:.74rem;color:var(--muted);line-height:1.45}
+.cta-arrow{position:absolute;top:1rem;right:1rem;font-size:.88rem;color:var(--muted)}
+
+/* INFO ROW */
+.info-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:.7rem;margin-bottom:1.5rem}
+.info-box{background:white;border:1px solid var(--border);border-radius:12px;padding:.85rem 1rem}
+.info-label{font-size:.65rem;color:var(--muted);font-weight:500;letter-spacing:.04em;margin-bottom:4px;text-transform:uppercase}
+.info-val{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--ink)}
+.info-val.small{font-size:.86rem;font-family:'DM Sans',sans-serif;font-weight:600}
+
+/* CALLOUT */
+.callout{border-radius:12px;padding:.9rem 1.1rem;font-size:.85rem;line-height:1.7;margin-bottom:1.5rem}
+.callout.sage{background:var(--sage-light);border-left:3px solid var(--sage);color:#2A3E26}
+.callout.gold{background:var(--gold-light);border-left:3px solid var(--gold);color:#5A3E10}
+.callout.rose{background:var(--rose-light);border-left:3px solid var(--rose);color:#6B2A1E}
+.callout.slate{background:var(--slate-light);border-left:3px solid var(--slate);color:#1E3548}
+
+/* BADGES */
+.course-badge{font-size:.67rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:3px 9px;border-radius:999px;display:inline-block;margin-bottom:6px}
+.badge-sage{background:var(--sage-light);color:var(--sage)}.badge-gold{background:var(--gold-light);color:#8B5E1A}.badge-rose{background:var(--rose-light);color:var(--rose)}.badge-slate{background:var(--slate-light);color:var(--slate)}.badge-muted{background:rgba(122,112,104,.12);color:var(--muted)}
+
+/* COURSE CARDS */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:2rem}
+.course-card{background:white;border:1px solid var(--border);border-radius:16px;overflow:hidden}
+.course-card-header{padding:1.1rem 1.1rem .9rem;border-bottom:1px solid var(--border)}
+.course-card-name{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;color:var(--ink);margin-bottom:4px}
+.course-card-sub{font-size:.8rem;color:var(--muted);line-height:1.5}
+.course-card-body{padding:.9rem 1.1rem}
+.course-detail-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(26,23,20,.05);font-size:.81rem;gap:.5rem}
+.course-detail-row:last-child{border-bottom:none}
+.detail-label{color:var(--muted);flex-shrink:0}.detail-val{color:var(--ink);font-weight:500;text-align:right}
+
+/* SCROLLABLE TABLE */
+.table-scroll-hint{font-size:.7rem;color:var(--muted);text-align:right;margin-bottom:4px;font-family:'DM Mono',monospace;display:none}
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:14px;border:1px solid var(--border);margin-bottom:1.5rem}
+.data-table{width:100%;min-width:540px;border-collapse:collapse;background:white;font-size:.82rem}
+.data-table th{background:var(--ink);color:var(--cream);padding:10px 12px;text-align:left;font-weight:500;font-size:.74rem;letter-spacing:.04em;white-space:nowrap}
+.data-table td{padding:10px 12px;border-bottom:1px solid rgba(26,23,20,.06);color:var(--ink);vertical-align:top;line-height:1.5}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:rgba(247,244,238,.6)}
+
+/* SALARY */
+.salary-section{margin-bottom:2rem}
+.salary-row{margin-bottom:1.1rem}
+.salary-meta{display:flex;justify-content:space-between;align-items:flex-start;gap:.5rem;margin-bottom:5px;flex-wrap:wrap}
+.salary-title{font-size:.84rem;font-weight:500;color:var(--ink)}
+.salary-amount{font-family:'DM Mono',monospace;font-size:.79rem;color:var(--sage);font-weight:500;white-space:nowrap}
+.salary-bar-bg{background:rgba(26,23,20,.08);border-radius:999px;height:6px;overflow:hidden}
+.salary-bar-fill{height:6px;border-radius:999px;background:var(--sage)}
+
+/* STEP LIST */
+.step-list{list-style:none}
+.step-item{display:flex;gap:1rem;padding:1.1rem 0;border-bottom:1px solid var(--border);align-items:flex-start}
+.step-item:last-child{border-bottom:none}
+.step-num{min-width:30px;height:30px;border-radius:50%;background:var(--ink);color:var(--cream);font-size:.78rem;font-weight:600;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px}
+.step-title{font-weight:600;font-size:.9rem;color:var(--ink);margin-bottom:4px}
+.step-desc{font-size:.81rem;color:var(--muted);line-height:1.65}
+.step-desc strong{color:var(--ink);font-weight:500}
+.step-links{display:flex;flex-wrap:wrap;gap:5px;margin-top:7px}
+.step-link{font-family:'DM Mono',monospace;font-size:.7rem;color:var(--slate);background:var(--slate-light);padding:3px 9px;border-radius:6px;text-decoration:none;word-break:break-all}
+
+/* COMPARE */
+.compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.compare-col{background:white;border:1.5px solid var(--border);border-radius:16px;overflow:hidden}
+.compare-header{padding:.9rem 1rem;border-bottom:1px solid var(--border)}
+.compare-header-title{font-weight:600;font-size:.88rem;color:var(--ink)}
+.compare-header-sub{font-size:.72rem;color:var(--muted);margin-top:2px}
+.compare-body{padding:.6rem 1rem}
+.compare-row{display:flex;gap:7px;padding:6px 0;font-size:.78rem;color:var(--ink);border-bottom:1px solid rgba(26,23,20,.05);align-items:flex-start;line-height:1.4}
+.compare-row:last-child{border-bottom:none}
+.compare-icon{flex-shrink:0;font-size:.76rem;margin-top:1px}
+.check{color:var(--sage)}.cross{color:var(--rose)}
+
+/* TIMELINE */
+.timeline{position:relative;padding-left:1.8rem}
+.timeline::before{content:'';position:absolute;left:7px;top:0;bottom:0;width:2px;background:var(--border)}
+.timeline-item{position:relative;margin-bottom:1.75rem}
+.timeline-dot{position:absolute;left:-1.8rem;top:4px;width:16px;height:16px;border-radius:50%;background:white;border:2px solid var(--sage)}
+.timeline-dot.filled{background:var(--sage)}
+.timeline-year{font-family:'DM Mono',monospace;font-size:.67rem;color:var(--muted);letter-spacing:.06em;margin-bottom:3px}
+.timeline-role{font-weight:600;font-size:.9rem;color:var(--ink)}
+.timeline-salary{font-family:'DM Mono',monospace;font-size:.75rem;color:var(--sage);margin-top:2px}
+.timeline-detail{font-size:.79rem;color:var(--muted);margin-top:3px;line-height:1.5}
+
+/* DOC GRID */
+.doc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:.65rem;margin-bottom:1.5rem}
+.doc-item{background:white;border:1px solid var(--border);border-radius:10px;padding:.78rem .9rem;font-size:.81rem;color:var(--ink);line-height:1.4}
+.doc-item span{display:block;font-size:.68rem;color:var(--muted);margin-top:2px}
+
+/* SCHOLAR */
+.scholar-list{list-style:none}
+.scholar-item{background:white;border:1px solid var(--border);border-radius:12px;padding:.88rem 1.1rem;margin-bottom:.6rem;display:flex;gap:.85rem;align-items:flex-start}
+.scholar-dot{min-width:8px;height:8px;border-radius:50%;background:var(--sage);margin-top:6px;flex-shrink:0}
+.scholar-name{font-weight:600;font-size:.88rem;color:var(--ink)}
+.scholar-detail{font-size:.79rem;color:var(--muted);line-height:1.55;margin-top:3px}
+.scholar-benefit{display:inline-block;font-family:'DM Mono',monospace;font-size:.68rem;color:var(--sage);background:var(--sage-light);padding:2px 8px;border-radius:6px;margin-top:5px;word-break:break-all}
+
+/* DIVIDER */
+.divider{height:1px;background:var(--border);margin:2rem 0}
+
+/* FADE */
+.fade-in{animation:fadeUp .45s ease both}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* FOOTER */
+footer{background:var(--ink);color:rgba(247,244,238,.6);padding:1.75rem 1.5rem;text-align:center;font-size:.77rem;line-height:1.8}
+footer strong{color:var(--cream)}
+footer a{color:rgba(247,244,238,.5);font-family:'DM Mono',monospace;font-size:.7rem;word-break:break-all}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem 1rem;margin-top:.5rem}
+
+/* ══ MOBILE ≤ 768px ══ */
+@media(max-width:768px){
+  .top-nav{display:none}
+  .tab-bar{display:flex}
+  .page{padding-top:1.25rem;padding-bottom:calc(var(--tab-h) + 1rem)}
+  .container{padding:0 1rem}
+  .hero-section{padding:1.5rem 0 1.25rem}
+  .cta-arrow{display:none}
+  .course-grid{grid-template-columns:1fr}
+  .compare-grid{grid-template-columns:1fr}
+  .table-scroll-hint{display:block}
+}
+
+/* ══ SMALL PHONES ≤ 420px ══ */
+@media(max-width:420px){
+  .hero-title{font-size:1.9rem}
+  .cta-grid{grid-template-columns:1fr}
+  .info-row{grid-template-columns:1fr 1fr}
+  .doc-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- TOP NAV (desktop) -->
+<nav class="top-nav">
+  <a class="nav-brand" href="#" onclick="showPage('home');return false;">Her <span>Future</span></a>
+  <ul class="nav-links">
+    <li><a href="#" onclick="showPage('home');return false;"     id="nav-home"    class="active">Overview</a></li>
+    <li><a href="#" onclick="showPage('courses');return false;"  id="nav-courses">Courses</a></li>
+    <li><a href="#" onclick="showPage('colleges');return false;" id="nav-colleges">Colleges</a></li>
+    <li><a href="#" onclick="showPage('action');return false;"   id="nav-action">Action Plan</a></li>
+  </ul>
+</nav>
+
+<!-- BOTTOM TAB BAR (mobile) -->
+<nav class="tab-bar" id="tabBar">
+  <button class="tab-btn active" id="tab-home"    onclick="showPage('home')">
+    <span class="tab-icon">🏠</span><span class="tab-label">Overview</span>
+  </button>
+  <button class="tab-btn" id="tab-courses"  onclick="showPage('courses')">
+    <span class="tab-icon">🎓</span><span class="tab-label">Courses</span>
+  </button>
+  <button class="tab-btn" id="tab-colleges" onclick="showPage('colleges')">
+    <span class="tab-icon">🏛️</span><span class="tab-label">Colleges</span>
+  </button>
+  <button class="tab-btn" id="tab-action"   onclick="showPage('action')">
+    <span class="tab-icon">📋</span><span class="tab-label">Action</span>
+  </button>
+</nav>
+
+<!-- PAGE 1: OVERVIEW -->
+<div class="page active" id="page-home"><div class="container">
+  <div class="hero-section fade-in">
+    <div class="hero-tag">Education Guide 2026 · Taliparamba, Kannur</div>
+    <h1 class="hero-title">Choose the right<br>path for a <em>strong</em><br>future.</h1>
+    <p class="hero-sub">A complete honest guide for a Plus 2 Commerce student — Kerala, Mangalore, and what comes after.</p>
+    <div class="profile-card">
+      <div class="profile-pill"><span class="profile-pill-val">74%</span><span class="profile-pill-label">Plus 2 Marks</span></div>
+      <div class="profile-pill"><span class="profile-pill-val">Commerce</span><span class="profile-pill-label">Stream</span></div>
+      <div class="profile-pill"><span class="profile-pill-val">No Maths</span><span class="profile-pill-label">Preference</span></div>
+      <div class="profile-pill"><span class="profile-pill-val">Taliparamba</span><span class="profile-pill-label">Location</span></div>
+    </div>
+    <div class="urgent-banner">
+      <div class="urgent-dot"></div>
+      <div class="urgent-text"><strong>Registration closes June 12, 2026</strong> — Kannur University CAP is open. Register at <a href="https://admission.kannuruniversity.ac.in" target="_blank">admission.kannuruniversity.ac.in</a> today.</div>
+    </div>
+    <div class="section-header" style="text-align:left">
+      <span class="section-eyebrow">Explore all sections</span>
+      <div class="section-title">Four sections, everything covered.</div>
+    </div>
+    <div class="cta-grid">
+      <div class="cta-card c-sage"  onclick="showPage('courses')"><div class="cta-icon">🎓</div><div class="cta-title">Courses</div><div class="cta-desc">BBA, B.Com, BCA — what each one is and what job comes after.</div><div class="cta-arrow">↗</div></div>
+      <div class="cta-card c-gold"  onclick="showPage('colleges')"><div class="cta-icon">🏛️</div><div class="cta-title">Colleges</div><div class="cta-desc">Best colleges in Kannur, Kozhikode &amp; Mangalore with fees.</div><div class="cta-arrow">↗</div></div>
+      <div class="cta-card c-rose"  onclick="showPage('action')"><div class="cta-icon">📋</div><div class="cta-title">Action Plan</div><div class="cta-desc">Step-by-step: what to do today, documents, scholarships.</div><div class="cta-arrow">↗</div></div>
+      <div class="cta-card c-slate" onclick="showPage('courses')"><div class="cta-icon">☁️</div><div class="cta-title">BCA AI+Cloud</div><div class="cta-desc">The hottest tech course — salary, certifications, where to study.</div><div class="cta-arrow">↗</div></div>
+    </div>
+    <div class="divider"></div>
+    <div class="section-header"><span class="section-eyebrow">Quick summary</span><div class="section-title">The recommendation at a glance.</div></div>
+    <div class="info-row">
+      <div class="info-box"><div class="info-label">Best course</div><div class="info-val small">B.Com or BBA</div></div>
+      <div class="info-box"><div class="info-label">Tech course</div><div class="info-val small">BCA AI+Cloud</div></div>
+      <div class="info-box"><div class="info-label">Min fees Kerala</div><div class="info-val">₹2,490</div></div>
+      <div class="info-box"><div class="info-label">Duration</div><div class="info-val">3 Yrs</div></div>
+      <div class="info-box"><div class="info-label">Maths needed?</div><div class="info-val small">No ✓</div></div>
+    </div>
+    <div class="callout sage"><strong>In simple words:</strong> She has two strong paths — <strong>BBA</strong> (business career, zero maths) or <strong>BCA with AI + Cloud + DevOps</strong> (high-paying tech career, available in Mangalore). Kerala govt colleges cost almost nothing. Mangalore is 3 hours away and has the exact tech course she wants.</div>
+  </div>
+</div></div>
+
+<!-- PAGE 2: COURSES -->
+<div class="page" id="page-courses"><div class="container">
+  <div class="section-header fade-in" style="padding-top:.5rem"><span class="section-eyebrow">What to study</span><div class="section-title">Choosing the right course.</div></div>
+
+  <div class="course-grid">
+    <div class="course-card">
+      <div class="course-card-header"><div class="course-badge badge-sage">Best fit · No maths</div><div class="course-card-name">B.Com</div><div class="course-card-sub">Bachelor of Commerce. Directly continues from Plus 2. Gateway to CA, bank jobs and government exams.</div></div>
+      <div class="course-card-body">
+        <div class="course-detail-row"><span class="detail-label">Duration</span><span class="detail-val">3 years</span></div>
+        <div class="course-detail-row"><span class="detail-label">Maths needed</span><span class="detail-val">No ✓</span></div>
+        <div class="course-detail-row"><span class="detail-label">Kerala fees</span><span class="detail-val">₹2,490–₹20,000 total</span></div>
+        <div class="course-detail-row"><span class="detail-label">Starting salary</span><span class="detail-val">₹2.5–5 LPA</span></div>
+        <div class="course-detail-row"><span class="detail-label">After course</span><span class="detail-val">CA, MBA, Bank jobs, PSC</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-header"><div class="course-badge badge-gold">Great fit · No maths</div><div class="course-card-name">BBA</div><div class="course-card-sub">Business Administration. For students who like people, management, marketing or want their own business.</div></div>
+      <div class="course-card-body">
+        <div class="course-detail-row"><span class="detail-label">Duration</span><span class="detail-val">3 years</span></div>
+        <div class="course-detail-row"><span class="detail-label">Maths needed</span><span class="detail-val">No ✓</span></div>
+        <div class="course-detail-row"><span class="detail-label">Kerala fees</span><span class="detail-val">₹20,000–₹90,000 total</span></div>
+        <div class="course-detail-row"><span class="detail-label">Starting salary</span><span class="detail-val">₹3–6 LPA</span></div>
+        <div class="course-detail-row"><span class="detail-label">After course</span><span class="detail-val">MBA, Marketing, HR, Business</span></div>
+      </div>
+    </div>
+    <div class="course-card">
+      <div class="course-card-header"><div class="course-badge badge-slate">Tech · Basic logic only</div><div class="course-card-name">BCA — AI + Cloud + DevOps</div><div class="course-card-sub">Most future-proof tech course. Exact specialisation only available in Mangalore. Commerce students accepted.</div></div>
+      <div class="course-card-body">
+        <div class="course-detail-row"><span class="detail-label">Duration</span><span class="detail-val">3 years</span></div>
+        <div class="course-detail-row"><span class="detail-label">Maths needed</span><span class="detail-val">Basic logic only</span></div>
+        <div class="course-detail-row"><span class="detail-label">Mangalore fees</span><span class="detail-val">₹1.18L/yr</span></div>
+        <div class="course-detail-row"><span class="detail-label">Starting salary</span><span class="detail-val">₹3.5–8 LPA</span></div>
+        <div class="course-detail-row"><span class="detail-label">After course</span><span class="detail-val">Cloud Eng, DevOps, AI roles</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout gold"><strong>B.Com vs BBA:</strong> Likes accounts, tax, finance, bank jobs → B.Com. Likes business, people, marketing, entrepreneurship → BBA. Both zero maths. Both excellent for 74% Commerce.</div>
+  <div class="divider"></div>
+
+  <div class="section-header"><span class="section-eyebrow">BCA explained simply</span><div class="section-title">What AI + Cloud + DevOps actually means.</div></div>
+  <div class="course-grid">
+    <div class="course-card"><div class="course-card-header"><div class="course-badge badge-slate">AI</div><div class="course-card-name">Teaching computers to think</div><div class="course-card-sub">Like the tech behind ChatGPT, Netflix and Google Search. You build programs that see, understand and decide on their own.</div></div></div>
+    <div class="course-card"><div class="course-card-header"><div class="course-badge badge-sage">Cloud Computing</div><div class="course-card-name">The internet's power station</div><div class="course-card-sub">AWS, Azure, Google Cloud — invisible machines that run every app on your phone. Every company in the world now runs on cloud.</div></div></div>
+    <div class="course-card"><div class="course-card-header"><div class="course-badge badge-gold">DevOps</div><div class="course-card-name">The speed engineer</div><div class="course-card-sub">Automates how software is built, tested and released. Uses Docker, Kubernetes, GitHub. One of the highest-paid IT roles in India right now.</div></div></div>
+  </div>
+
+  <div class="section-header"><span class="section-eyebrow">Salary after BCA AI + Cloud</span><div class="section-title">What she can earn.</div></div>
+  <div class="salary-section">
+    <div class="salary-row"><div class="salary-meta"><span class="salary-title">Fresher — Cloud Support / Junior DevOps (0–1 yr)</span><span class="salary-amount">₹3.5–₹6 LPA</span></div><div class="salary-bar-bg"><div class="salary-bar-fill" style="width:22%"></div></div></div>
+    <div class="salary-row"><div class="salary-meta"><span class="salary-title">Cloud Engineer / DevOps Engineer (2–3 yrs)</span><span class="salary-amount">₹6–₹15 LPA</span></div><div class="salary-bar-bg"><div class="salary-bar-fill" style="width:48%"></div></div></div>
+    <div class="salary-row"><div class="salary-meta"><span class="salary-title">Senior Cloud Architect / AI Engineer (5+ yrs)</span><span class="salary-amount">₹15–₹45 LPA</span></div><div class="salary-bar-bg"><div class="salary-bar-fill" style="width:80%"></div></div></div>
+    <div class="salary-row"><div class="salary-meta"><span class="salary-title">AWS Solutions Architect Pro / Cloud Leader</span><span class="salary-amount">₹20–₹47 LPA+</span></div><div class="salary-bar-bg"><div class="salary-bar-fill" style="width:100%"></div></div></div>
+  </div>
+
+  <div class="callout sage"><strong>Free certifications done DURING BCA — no extra time after:</strong><br>• AWS Cloud Practitioner — free to study, ₹12,000 exam. Do in Year 2.<br>• Microsoft Azure AZ-900 — free to study, ₹3,500 exam. Do in Year 2.<br>• Google AI Essentials — completely free on Coursera. Do in Year 1.<br>These 3 on her resume = salary jumps 40–60% at first hiring.</div>
+  <div class="divider"></div>
+
+  <div class="section-header"><span class="section-eyebrow">Career roadmap</span><div class="section-title">Her journey from today to 2034.</div></div>
+  <div class="timeline">
+    <div class="timeline-item"><div class="timeline-dot filled"></div><div class="timeline-year">2026 — NOW</div><div class="timeline-role">Apply for UG Admission</div><div class="timeline-detail">Register on CAP portals. Choose BBA/B.Com (Kerala) or BCA AI+Cloud (Mangalore).</div></div>
+    <div class="timeline-item"><div class="timeline-dot filled"></div><div class="timeline-year">2026–2029</div><div class="timeline-role">3-Year UG Degree + Certifications</div><div class="timeline-salary">Study · Intern · Build Projects · Get AWS / Google certs</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2029 — First Job</div><div class="timeline-role">Fresher Role</div><div class="timeline-salary">₹3.5–8 LPA (BCA Cloud) · ₹2.5–5 LPA (BBA/BCom)</div><div class="timeline-detail">TCS, Infosys, Amazon, HDFC Bank, Wipro, startups.</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2031–2032</div><div class="timeline-role">Mid-level Engineer / Manager</div><div class="timeline-salary">₹6–15 LPA</div></div>
+    <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-year">2034 +</div><div class="timeline-role">Senior / Leadership Role</div><div class="timeline-salary">₹15–47 LPA+</div><div class="timeline-detail">Cloud Architect, AI Engineer, Business Director, or own company.</div></div>
+  </div>
+</div></div>
+
+<!-- PAGE 3: COLLEGES -->
+<div class="page" id="page-colleges"><div class="container">
+  <div class="section-header fade-in" style="padding-top:.5rem"><span class="section-eyebrow">Where to study</span><div class="section-title">Best colleges — Kerala &amp; Mangalore.</div></div>
+  <div class="callout sage"><strong>74% marks:</strong> Qualifies for all aided and self-financing colleges. Govt college seats are competitive but worth trying via CAP. Mangalore colleges accept directly — no entrance exam.</div>
+
+  <div class="section-header"><span class="section-eyebrow">Kerala · Nearest to Taliparamba</span><div class="section-title">Government &amp; aided colleges.</div></div>
+  <div class="table-scroll-hint">← swipe left to see all columns →</div>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>College</th><th>Location</th><th>Distance</th><th>Course</th><th>Total Fees (3 yrs)</th><th>Type</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Govt. Brennen College</strong></td><td>Thalassery</td><td>30 min</td><td>B.Com, BBA</td><td><strong>₹10,000–₹20,000</strong></td><td><span class="course-badge badge-sage" style="margin:0">Govt</span></td></tr>
+        <tr><td><strong>College of Applied Science (CAS)</strong></td><td>Kannur</td><td>40 min</td><td>B.Com, BCA</td><td><strong>₹6,000–₹15,000</strong></td><td><span class="course-badge badge-sage" style="margin:0">Govt</span></td></tr>
+        <tr><td><strong>Taliparamba Arts &amp; Science College</strong></td><td>Taliparamba</td><td>0 km — home!</td><td>BBA, BCA</td><td><strong>~₹20,000</strong></td><td><span class="course-badge badge-muted" style="margin:0">Private</span></td></tr>
+        <tr><td><strong>Sir Syed College</strong></td><td>Taliparamba</td><td>Near home</td><td>B.Com, BBA</td><td><strong>₹30,000–₹60,000</strong></td><td><span class="course-badge badge-gold" style="margin:0">Aided</span></td></tr>
+        <tr><td><strong>Nirmalagiri College</strong></td><td>Koothuparamba</td><td>25 min</td><td>B.Com, BBA</td><td><strong>₹30,000–₹50,000</strong></td><td><span class="course-badge badge-gold" style="margin:0">Aided</span></td></tr>
+        <tr><td><strong>Chinmaya Institute of Technology</strong></td><td>Kannur</td><td>30 min</td><td>BCA</td><td><strong>₹2.75L total</strong></td><td><span class="course-badge badge-muted" style="margin:0">Private</span></td></tr>
+        <tr><td><strong>St. Joseph's Devagiri</strong></td><td>Kozhikode</td><td>1.5 hrs</td><td>BCA, B.Com</td><td><strong>₹1–2.4L total</strong></td><td><span class="course-badge badge-gold" style="margin:0">Aided · NIRF #74</span></td></tr>
+        <tr><td><strong>Farook College</strong></td><td>Kozhikode</td><td>1.5 hrs</td><td>B.Com, BBA</td><td><strong>₹15,000–₹30,000</strong></td><td><span class="course-badge badge-sage" style="margin:0">Govt Aided</span></td></tr>
+        <tr><td><strong>Chinmaya Arts &amp; Science (Women)</strong></td><td>Kannur</td><td>40 min</td><td>BBA</td><td><strong>₹40,000–₹70,000</strong></td><td><span class="course-badge badge-gold" style="margin:0">Aided · Women</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout gold"><strong>How Kerala admission works:</strong> Register at admission.kannuruniversity.ac.in and admission.uoc.ac.in. Fill up to 20 college preferences in order. System allots based on marks + preferences. Trial allotment → adjust → final allotment → pay fee within 3–5 days → report to college.</div>
+  <div class="divider"></div>
+
+  <div class="section-header"><span class="section-eyebrow">Mangalore · 3–3.5 hrs by train</span><div class="section-title">Including the exact BCA AI+Cloud course.</div></div>
+  <div class="table-scroll-hint">← swipe left to see all columns →</div>
+  <div class="table-scroll">
+    <table class="data-table">
+      <thead><tr><th>College</th><th>Course</th><th>Fees / year</th><th>Hostel / year</th><th>NAAC</th><th>Website</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Srinivas University</strong><br><span style="font-size:.73rem;color:var(--sage)">← exact BCA AI+Cloud+DevOps</span></td><td>BCA AI+Cloud+DevOps</td><td><strong>₹1.18L</strong> (non-KA)</td><td>Available</td><td><span class="course-badge badge-sage" style="margin:0">A</span></td><td style="font-family:'DM Mono',monospace;font-size:.69rem">srinivasuniversity.edu.in</td></tr>
+        <tr><td><strong>Yenepoya University</strong><br><span style="font-size:.73rem;color:var(--slate)">Microsoft + IBM + TCS</span></td><td>BCA AI+Cloud+DevOps</td><td><strong>₹65,000–₹82,500</strong></td><td>Available</td><td><span class="course-badge badge-slate" style="margin:0">QS Ranked</span></td><td style="font-family:'DM Mono',monospace;font-size:.69rem">yiascm.yenepoya.edu.in</td></tr>
+        <tr><td><strong>St. Aloysius</strong><br><span style="font-size:.73rem;color:var(--gold)">Best reputation in Mangalore</span></td><td>BCA</td><td><strong>₹79,000–₹1L</strong></td><td>₹75,000/yr</td><td><span class="course-badge badge-gold" style="margin:0">A++ · NIRF #73</span></td><td style="font-family:'DM Mono',monospace;font-size:.69rem">staloysius.edu.in</td></tr>
+        <tr><td><strong>SDM College</strong></td><td>BBA</td><td><strong>₹40,000–₹80,000</strong></td><td>Available</td><td><span class="course-badge badge-sage" style="margin:0">A</span></td><td style="font-family:'DM Mono',monospace;font-size:.69rem">sdm.ac.in</td></tr>
+        <tr><td><strong>Govt. First Grade College</strong><br><span style="font-size:.73rem;color:var(--muted)">Cheapest in Mangalore</span></td><td>B.Com, BBA</td><td><strong>₹5,000–₹15,000</strong></td><td>Limited</td><td><span class="course-badge badge-sage" style="margin:0">Govt</span></td><td style="font-family:'DM Mono',monospace;font-size:.69rem">Direct to college</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="callout slate"><strong>Total yearly cost in Mangalore:</strong><br>Srinivas: ₹1.18L + hostel ₹70k = <strong>~₹1.85–2L/year</strong><br>Yenepoya: ₹82.5k + hostel ₹70k = <strong>~₹1.5L/year</strong><br>Kerala govt + live at home = <strong>almost free</strong></div>
+  <div class="divider"></div>
+
+  <div class="section-header"><span class="section-eyebrow">Decision help</span><div class="section-title">Kerala vs Mangalore.</div></div>
+  <div class="compare-grid">
+    <div class="compare-col">
+      <div class="compare-header" style="border-top:3px solid var(--sage)"><div class="compare-header-title">🌴 Stay in Kerala</div><div class="compare-header-sub">Nearest · Cheapest · Home</div></div>
+      <div class="compare-body">
+        <div class="compare-row"><span class="compare-icon check">✓</span>Fees as low as ₹2,490 for 3 years</div>
+        <div class="compare-row"><span class="compare-icon check">✓</span>Live at home — zero extra cost</div>
+        <div class="compare-row"><span class="compare-icon check">✓</span>E-Grantz — may be fully free</div>
+        <div class="compare-row"><span class="compare-icon check">✓</span>Good for PSC / govt bank jobs</div>
+        <div class="compare-row"><span class="compare-icon cross">✗</span>BCA AI+Cloud not available here</div>
+        <div class="compare-row"><span class="compare-icon cross">✗</span>Smaller IT placement network</div>
+      </div>
+    </div>
+    <div class="compare-col">
+      <div class="compare-header" style="border-top:3px solid var(--slate)"><div class="compare-header-title">🏙️ Go to Mangalore</div><div class="compare-header-sub">3 hrs · Best tech course</div></div>
+      <div class="compare-body">
+        <div class="compare-row"><span class="compare-icon check">✓</span>Exact BCA AI+Cloud at Srinivas</div>
+        <div class="compare-row"><span class="compare-icon check">✓</span>Microsoft + IBM + TCS at Yenepoya</div>
+        <div class="compare-row"><span class="compare-icon check">✓</span>180+ companies, better placements</div>
+        <div class="compare-row"><span class="compare-icon check">✓</span>Only 3 hrs from home by train</div>
+        <div class="compare-row"><span class="compare-icon cross">✗</span>₹1.5–2L per year with hostel</div>
+        <div class="compare-row"><span class="compare-icon cross">✗</span>Kerala E-Grantz not applicable</div>
+      </div>
+    </div>
+  </div>
+  <div class="callout sage"><strong>Bottom line:</strong> Budget allows ₹1.5–2L/year → <strong>Srinivas University, Mangalore</strong> for BCA AI+Cloud+DevOps. Budget is tight → <strong>BBA/B.Com at a Kerala govt/aided college</strong> and build cloud skills free online. Both paths reach the same career.</div>
+</div></div>
+
+<!-- PAGE 4: ACTION PLAN -->
+<div class="page" id="page-action"><div class="container">
+  <div class="section-header fade-in" style="padding-top:.5rem"><span class="section-eyebrow">What to do now</span><div class="section-title">Step-by-step action plan.</div></div>
+  <div class="urgent-banner" style="margin-bottom:1.75rem">
+    <div class="urgent-dot"></div>
+    <div class="urgent-text"><strong>June 7, 2026 — CAP closes June 12. 5 days left.</strong> Register at <a href="https://admission.kannuruniversity.ac.in" target="_blank">admission.kannuruniversity.ac.in</a> right now. Takes 20 minutes.</div>
+  </div>
+
+  <ul class="step-list">
+    <li class="step-item"><div class="step-num">1</div><div class="step-content"><div class="step-title">Register on Kannur University CAP — TODAY</div><div class="step-desc">Click Register → enter Plus 2 marks, details, email → pay ₹500 → get application number. <strong>Closes June 12.</strong></div><div class="step-links"><a class="step-link" href="https://admission.kannuruniversity.ac.in" target="_blank">admission.kannuruniversity.ac.in</a></div></div></li>
+    <li class="step-item"><div class="step-num">2</div><div class="step-content"><div class="step-title">Register on Calicut University CAP — TODAY / TOMORROW</div><div class="step-desc">Same process. Covers Kozhikode colleges including St. Joseph's Devagiri. Doubles her options. <strong>Closes June 10–12.</strong></div><div class="step-links"><a class="step-link" href="https://admission.uoc.ac.in" target="_blank">admission.uoc.ac.in</a></div></div></li>
+    <li class="step-item"><div class="step-num">3</div><div class="step-content"><div class="step-title">Fill college preference list carefully</div><div class="step-desc">Put best college FIRST. Fill all 20 slots — don't leave any empty. Suggested order: <strong>Brennen → CAS Kannur → Nirmalagiri → Sir Syed → Taliparamba Arts &amp; Science → Chinmaya (if BCA).</strong></div></div></li>
+    <li class="step-item"><div class="step-num">4</div><div class="step-content"><div class="step-title">If Mangalore — apply directly to Srinivas or Yenepoya</div><div class="step-desc">No CAP. Fill online form → pay ₹30,000 token fee (adjusted in Year 1) → merit-based direct admission. No entrance exam needed.</div><div class="step-links"><a class="step-link" href="https://srinivasuniversity.edu.in" target="_blank">srinivasuniversity.edu.in</a><a class="step-link" href="https://yiascm.yenepoya.edu.in" target="_blank">yiascm.yenepoya.edu.in</a></div></div></li>
+    <li class="step-item"><div class="step-num">5</div><div class="step-content"><div class="step-title">Wait for trial allotment (mid-June)</div><div class="step-desc">Trial allotment is NOT final. It shows where she might get. She can still change preferences after seeing it.</div></div></li>
+    <li class="step-item"><div class="step-num">6</div><div class="step-content"><div class="step-title">Pay fee when final allotment arrives (late June)</div><div class="step-desc"><strong>Pay within 3–5 days</strong> and download the allotment memo. Miss this = lose the seat permanently. Do not delay even one day.</div></div></li>
+    <li class="step-item"><div class="step-num">7</div><div class="step-content"><div class="step-title">Report to college with all documents (July 2026)</div><div class="step-desc">Original documents + allotment memo + passport photos. Classes start first week of July. 2nd and 3rd allotment rounds available to upgrade.</div></div></li>
+    <li class="step-item"><div class="step-num">8</div><div class="step-content"><div class="step-title">Apply for E-Grantz scholarship after admission</div><div class="step-desc">Nearest Akshaya Centre within 1 month of joining. SC/ST/OBC/OEC — full tuition + stipend. Also apply NSP from August.</div><div class="step-links"><a class="step-link" href="https://egrantz.kerala.gov.in" target="_blank">egrantz.kerala.gov.in</a><a class="step-link" href="https://scholarships.gov.in" target="_blank">scholarships.gov.in</a></div></div></li>
+    <li class="step-item"><div class="step-num">9</div><div class="step-content"><div class="step-title">From Day 1 — start free AWS course online</div><div class="step-desc">Register free at aws.amazon.com/training → "AWS Cloud Practitioner Essentials" → appear for exam in Year 2. Adds ₹1–2 LPA to starting salary.</div><div class="step-links"><a class="step-link" href="https://aws.amazon.com/training" target="_blank">aws.amazon.com/training</a></div></div></li>
+  </ul>
+  <div class="divider"></div>
+
+  <div class="section-header"><span class="section-eyebrow">Keep these ready</span><div class="section-title">Documents needed.</div></div>
+  <div class="doc-grid">
+    <div class="doc-item"><strong>Plus 2 Mark Sheet</strong><span>Original + 2 photocopies</span></div>
+    <div class="doc-item"><strong>SSLC Certificate</strong><span>Class 10 — age/name proof</span></div>
+    <div class="doc-item"><strong>Aadhaar Card</strong><span>Original + photocopy</span></div>
+    <div class="doc-item"><strong>TC from School</strong><span>Transfer certificate</span></div>
+    <div class="doc-item"><strong>Caste Certificate</strong><span>SC/ST/OBC/OEC — for E-Grantz</span></div>
+    <div class="doc-item"><strong>Income Certificate</strong><span>From Village Office</span></div>
+    <div class="doc-item"><strong>Bank Passbook</strong><span>Aadhaar-linked account</span></div>
+    <div class="doc-item"><strong>4 Passport Photos</strong><span>Recent, white background</span></div>
+    <div class="doc-item"><strong>Scanned Signature</strong><span>On white paper, for forms</span></div>
+    <div class="doc-item"><strong>Migration Certificate</strong><span>Only for Mangalore colleges</span></div>
+  </div>
+  <div class="divider"></div>
+
+  <div class="section-header"><span class="section-eyebrow">Make it almost free</span><div class="section-title">Scholarships to apply for.</div></div>
+  <ul class="scholar-list">
+    <li class="scholar-item"><div class="scholar-dot"></div><div><div class="scholar-name">E-Grantz — Kerala Government</div><div class="scholar-detail">SC/ST/OBC/OEC students. Full tuition refund + monthly stipend. Apply within 1 month of joining.</div><div class="scholar-benefit">egrantz.kerala.gov.in · Akshaya Centre</div></div></li>
+    <li class="scholar-item"><div class="scholar-dot"></div><div><div class="scholar-name">NSP — National Scholarship Portal</div><div class="scholar-detail">Family income below ₹2.5L/year. ₹10,000–₹25,000/year. Opens August every year.</div><div class="scholar-benefit">scholarships.gov.in</div></div></li>
+    <li class="scholar-item"><div class="scholar-dot"></div><div><div class="scholar-name">Pragati Scholarship — AICTE (Girl students)</div><div class="scholar-detail">₹50,000/year for girl students in degree programmes. She qualifies directly.</div><div class="scholar-benefit">aicte-pragati-saksham-gov.in</div></div></li>
+    <li class="scholar-item"><div class="scholar-dot"></div><div><div class="scholar-name">ASAP Kerala — Free Skill Training</div><div class="scholar-detail">Spoken English, IT skills, soft skills inside your college. Free. Automatically enrolled.</div><div class="scholar-benefit">Through your college — fully free</div></div></li>
+    <li class="scholar-item"><div class="scholar-dot"></div><div><div class="scholar-name">KPCR Scholarship — Kerala</div><div class="scholar-detail">Forward community, family income &lt; ₹1L/year. Apply through college office after admission.</div><div class="scholar-benefit">Apply through college</div></div></li>
+    <li class="scholar-item"><div class="scholar-dot" style="background:var(--slate)"></div><div><div class="scholar-name">SSP Karnataka — for Mangalore colleges</div><div class="scholar-detail">SC/ST/OBC in Karnataka colleges. Full tuition reimbursement.</div><div class="scholar-benefit">ssp.postmatric.karnataka.gov.in</div></div></li>
+  </ul>
+  <div class="divider"></div>
+  <div class="callout sage"><strong>🌟 The one thing:</strong> Register at <strong>admission.kannuruniversity.ac.in</strong> before June 12, 2026. ₹500. 20 minutes. This keeps the Kerala option open. Do it today.</div>
+</div></div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Education Guide 2026 — Taliparamba, Kannur, Kerala</strong>
+  <div class="footer-links">
+    <a href="https://admission.kannuruniversity.ac.in" target="_blank">admission.kannuruniversity.ac.in</a>
+    <a href="https://admission.uoc.ac.in" target="_blank">admission.uoc.ac.in</a>
+    <a href="https://srinivasuniversity.edu.in" target="_blank">srinivasuniversity.edu.in</a>
+    <a href="https://egrantz.kerala.gov.in" target="_blank">egrantz.kerala.gov.in</a>
+    <a href="https://scholarships.gov.in" target="_blank">scholarships.gov.in</a>
+  </div>
+</footer>
+
+<script>
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a=>a.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  var page=document.getElementById('page-'+id);
+  if(page){
+    page.classList.add('active');
+    page.querySelectorAll('.fade-in').forEach(function(el){el.style.animation='none';void el.offsetHeight;el.style.animation='';});
+  }
+  var n=document.getElementById('nav-'+id); if(n) n.classList.add('active');
+  var t=document.getElementById('tab-'+id); if(t) t.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
+</body>
+</html>
