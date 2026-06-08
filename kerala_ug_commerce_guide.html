@@ -1,0 +1,182 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font-sans); }
+.guide { padding: 1rem 0; max-width: 680px; }
+.section-title { font-size: 13px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-secondary); margin: 2rem 0 0.75rem; padding-bottom: 6px; border-bottom: 0.5px solid var(--color-border-tertiary); }
+.card { background: var(--color-background-primary); border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); padding: 1rem 1.25rem; margin-bottom: 10px; }
+.card-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+.badge { font-size: 11px; font-weight: 500; padding: 2px 8px; border-radius: var(--border-radius-md); }
+.badge-green { background: var(--color-background-success); color: var(--color-text-success); }
+.badge-blue { background: var(--color-background-info); color: var(--color-text-info); }
+.badge-amber { background: var(--color-background-warning); color: var(--color-text-warning); }
+.badge-red { background: var(--color-background-danger); color: var(--color-text-danger); }
+.card-title { font-size: 15px; font-weight: 500; color: var(--color-text-primary); }
+.card-sub { font-size: 13px; color: var(--color-text-secondary); line-height: 1.6; }
+.row { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin-bottom: 10px; }
+.metric { background: var(--color-background-secondary); border-radius: var(--border-radius-md); padding: 0.75rem 1rem; }
+.metric-label { font-size: 12px; color: var(--color-text-secondary); margin-bottom: 4px; }
+.metric-val { font-size: 18px; font-weight: 500; color: var(--color-text-primary); }
+.step-list { counter-reset: step; list-style: none; }
+.step-list li { counter-increment: step; display: flex; gap: 12px; padding: 10px 0; border-bottom: 0.5px solid var(--color-border-tertiary); align-items: flex-start; }
+.step-list li:last-child { border-bottom: none; }
+.step-num { width: 26px; height: 26px; border-radius: 50%; background: var(--color-background-info); color: var(--color-text-info); font-size: 12px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+.step-text { font-size: 14px; color: var(--color-text-primary); line-height: 1.6; }
+.step-text strong { font-weight: 500; }
+.highlight { background: var(--color-background-warning); border-left: 3px solid var(--color-text-warning); border-radius: 0; padding: 10px 14px; margin: 8px 0; font-size: 13px; color: var(--color-text-primary); line-height: 1.6; }
+.url { font-size: 12px; color: var(--color-text-info); font-family: var(--font-mono); word-break: break-all; }
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.tag { font-size: 12px; padding: 3px 10px; border-radius: 999px; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-secondary); }
+</style>
+
+<div class="guide">
+
+<div class="highlight">
+  <strong>Her profile:</strong> Plus 2 Commerce · 74% marks · Taliparamba, Kannur · Eligible for all Kerala university CAP UG admissions · June 2026 window is open NOW
+</div>
+
+<div class="section-title">Step 1 — best courses to choose</div>
+<div class="row">
+  <div class="card" style="border-top: 3px solid var(--color-border-success);">
+    <div class="card-header"><span class="badge badge-green">Top pick</span></div>
+    <div class="card-title">B.Com (Finance / Computer Applications)</div>
+    <div class="card-sub">3–4 yr degree. Directly uses her Commerce background. Gateway to CA, MBA, government jobs. Highest demand course. Available at 100+ colleges in Kannur district alone.</div>
+    <div class="tag-row"><span class="tag">BCom Finance</span><span class="tag">BCom CA</span><span class="tag">BCom Co-operation</span><span class="tag">BCom Logistics</span></div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Good option</span></div>
+    <div class="card-title">BBA (Business Administration)</div>
+    <div class="card-sub">3–4 yr management degree. Best if she wants to go into business, marketing, or MBA later. Fee slightly higher at private colleges.</div>
+    <div class="tag-row"><span class="tag">BBA Marketing</span><span class="tag">BBA Finance</span><span class="tag">BBA HR</span></div>
+  </div>
+</div>
+<div class="row">
+  <div class="card">
+    <div class="card-header"><span class="badge badge-blue">Good option</span></div>
+    <div class="card-title">BCA (Computer Applications)</div>
+    <div class="card-sub">Only if she has interest in computers/tech. Commerce students can apply. Good salary scope, but needs some tech aptitude. Available under Kannur University.</div>
+  </div>
+  <div class="card">
+    <div class="card-header"><span class="badge badge-amber">Consider</span></div>
+    <div class="card-title">B.Com + CA foundation</div>
+    <div class="card-sub">Do B.Com and simultaneously register for CA Foundation with ICAI. Most powerful combo for a commerce student. After B.Com = CA + MCom or MBA possible.</div>
+  </div>
+</div>
+
+<div class="section-title">Step 2 — best universities (Kerala)</div>
+
+<div class="card" style="border-left: 3px solid var(--color-border-success); border-radius: 0 var(--border-radius-lg) var(--border-radius-lg) 0;">
+  <div class="card-header"><span class="badge badge-green">Nearest & best fit</span><span class="card-title" style="font-size:14px;">Kannur University</span></div>
+  <div class="row" style="margin-top:8px;">
+    <div class="metric"><div class="metric-label">B.Com total fees</div><div class="metric-val">₹2,490–₹6,000</div></div>
+    <div class="metric"><div class="metric-label">Govt college fees</div><div class="metric-val">Nearly free</div></div>
+    <div class="metric"><div class="metric-label">Registration closes</div><div class="metric-val">~June 12, 2026</div></div>
+  </div>
+  <div class="card-sub" style="margin-top:8px;">Covers Kannur, Wayanad, Kasaragod districts. Lowest BCom fees in Kerala (₹2,490 for whole 3 yrs at govt college). Your sister is already in Kannur district — this is the natural first choice.</div>
+  <div class="url" style="margin-top:6px;">admission.kannuruniversity.ac.in</div>
+</div>
+
+<div class="card">
+  <div class="card-header"><span class="badge badge-blue">Nearby option</span><span class="card-title" style="font-size:14px;">Calicut University (University of Calicut)</span></div>
+  <div class="row" style="margin-top:8px;">
+    <div class="metric"><div class="metric-label">Application fee</div><div class="metric-val">₹500</div></div>
+    <div class="metric"><div class="metric-label">Registration closes</div><div class="metric-val">June 12, 2026</div></div>
+    <div class="metric"><div class="metric-label">NAAC grade</div><div class="metric-val">A</div></div>
+  </div>
+  <div class="card-sub" style="margin-top:8px;">Covers Kozhikode, Malappuram, Thrissur, Palakkad. Large network of excellent aided colleges. CAP (UGCAP) — merit based, no entrance exam. If she wants to study in Kozhikode area, this is the pick.</div>
+  <div class="url" style="margin-top:6px;">admission.uoc.ac.in</div>
+</div>
+
+<div class="section-title">Step 2b — best colleges near Kannur (where to apply)</div>
+
+<div class="card">
+  <div class="card-title" style="margin-bottom:6px;">Government / Aided colleges (very low fee, high value)</div>
+  <ul class="step-list">
+    <li><div class="step-num">1</div><div class="step-text"><strong>Government Brennen College, Thalassery</strong> — Oldest, most prestigious govt college near Kannur. BCom available. Nearly free tuition. Very high competition for seats.</div></li>
+    <li><div class="step-num">2</div><div class="step-text"><strong>College of Applied Science (CAS), Kannur</strong> — Govt college. BCom, BCA, BSc. Lowest fees. Under Kannur University CAP allotment.</div></li>
+    <li><div class="step-num">3</div><div class="step-text"><strong>Nirmalagiri College, Koothuparamba</strong> — One of the top rated BCom colleges in Kannur district. Fee ~₹6,980 for full course. Well-known, strong placement record.</div></li>
+    <li><div class="step-num">4</div><div class="step-text"><strong>St. Joseph's College, Devagiri (Calicut)</strong> — One of Kerala's finest aided colleges for BCom. If she goes Calicut university route.</div></li>
+    <li><div class="step-num">5</div><div class="step-text"><strong>N.A.M. College, Kalliad (Wandoor)</strong> — Strong for BCom Co-operation. Affordable. Under Calicut University.</div></li>
+  </ul>
+</div>
+
+<div class="section-title">Step 3 — outside Kerala: Bangalore</div>
+<div class="card">
+  <div class="card-title" style="margin-bottom:8px;">If she chooses Bangalore</div>
+  <div class="row">
+    <div class="metric"><div class="metric-label">Best affordable</div><div class="metric-val">NMKRV College</div></div>
+    <div class="metric"><div class="metric-label">Best prestige</div><div class="metric-val">Christ / SJCC</div></div>
+    <div class="metric"><div class="metric-label">Budget private</div><div class="metric-val">Kristu Jayanti</div></div>
+  </div>
+  <div class="card-sub" style="margin-top:8px;"><strong>NMKRV College for Women</strong> — Govt aided, Bangalore. Best ROI. Very low fee (~₹20k total). For women only — if she qualifies.<br><br><strong>St. Joseph's College of Commerce (SJCC)</strong> — Excellent placement. BCom ~₹1.5–2L total. Autonomous, highly respected.<br><br><strong>Christ University</strong> — NAAC A++, ranked #62. Prestigious but expensive (₹4.5L total). Entrance exam required.<br><br><strong>Kristu Jayanti College</strong> — Budget friendly (~₹4–4.5L BBA). Good campus, decent placements. 60% in 12th required (she qualifies at 74%).</div>
+  <div class="highlight" style="margin-top:10px;">Note: Bangalore colleges are mostly self-financing. Living + hostel cost ~₹10,000–15,000/month extra. Kerala govt/aided colleges are much more cost-effective if finances are a concern.</div>
+</div>
+
+<div class="section-title">Step 4 — fee breakdown & free education in Kerala</div>
+<div class="row">
+  <div class="card">
+    <div class="card-title" style="font-size:13px; margin-bottom:6px;">Govt college (Kerala)</div>
+    <div class="metric-val" style="font-size:22px;">₹2,490–₹6,000</div>
+    <div class="card-sub" style="font-size:12px; margin-top:4px;">For entire 3-year BCom. Tuition ~₹10,000/yr at govt colleges.</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="font-size:13px; margin-bottom:6px;">Aided private (Kerala)</div>
+    <div class="metric-val" style="font-size:22px;">₹6,000–₹20,000</div>
+    <div class="card-sub" style="font-size:12px; margin-top:4px;">Full 3 years. Nirmalagiri, Brennen-type colleges.</div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="font-size:13px; margin-bottom:6px;">Self-financing (Kerala)</div>
+    <div class="metric-val" style="font-size:22px;">₹30,000–₹90,000</div>
+    <div class="card-sub" style="font-size:12px; margin-top:4px;">Per year. Private unaided colleges.</div>
+  </div>
+</div>
+
+<div class="card" style="border-top: 3px solid var(--color-border-success); border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);">
+  <div class="card-title" style="margin-bottom:8px;">Scholarships to apply for (can make it nearly free)</div>
+  <ul class="step-list">
+    <li><div class="step-num"><i class="ti ti-star" aria-hidden="true"></i></div><div class="step-text"><strong>E-Grantz (Kerala govt)</strong> — For SC/ST/OBC/OEC students. Covers tuition + monthly stipend. No income limit for SC/ST/OEC. Apply at egrantz.kerala.gov.in after admission. Or visit any Akshaya Centre.</div></li>
+    <li><div class="step-num"><i class="ti ti-star" aria-hidden="true"></i></div><div class="step-text"><strong>Snehapoorvam Scholarship</strong> — For BPL family children. Apply through the college.</div></li>
+    <li><div class="step-num"><i class="ti ti-star" aria-hidden="true"></i></div><div class="step-text"><strong>KPCR Scholarship</strong> — For economically backward forward communities (family income &lt; ₹1 lakh/yr).</div></li>
+    <li><div class="step-num"><i class="ti ti-star" aria-hidden="true"></i></div><div class="step-text"><strong>NSP (National Scholarship Portal)</strong> — Central govt scholarships. Apply at scholarships.gov.in. Open Aug–Nov each year.</div></li>
+    <li><div class="step-num"><i class="ti ti-star" aria-hidden="true"></i></div><div class="step-text"><strong>Pragati Scholarship (AICTE)</strong> — For girl students in degree/diploma programs. Apply after admission.</div></li>
+  </ul>
+</div>
+
+<div class="section-title">Step 5 — exact next steps right now (June 2026)</div>
+<div class="card">
+  <ul class="step-list">
+    <li><div class="step-num">1</div><div class="step-text"><strong>Register at Kannur University CAP portal TODAY</strong> — Registration closes around June 12, 2026. Go to admission.kannuruniversity.ac.in → "Register Online." Fill name, DOB, category, email. Get application number.</div></li>
+    <li><div class="step-num">2</div><div class="step-text"><strong>Fill in college preferences (options)</strong> — List up to 20 college-course combinations in priority order. Put govt/aided colleges first. Trial allotment comes before actual allotment — use it to adjust options.</div></li>
+    <li><div class="step-num">3</div><div class="step-text"><strong>Also register on Calicut University CAP</strong> (admission.uoc.ac.in) — Same process. Last date June 10–12, 2026. Covers more college options in Kozhikode area.</div></li>
+    <li><div class="step-num">4</div><div class="step-text"><strong>Wait for trial allotment</strong> — This is NOT final. It gives you an idea of where she might get. You can still change options after trial allotment.</div></li>
+    <li><div class="step-num">5</div><div class="step-text"><strong>First allotment result</strong> — Usually late June. Pay the fee online + download allotment memo within the deadline (usually 3–5 days). Miss this = lose the seat.</div></li>
+    <li><div class="step-num">6</div><div class="step-text"><strong>Report to college</strong> — Carry allotment memo + all documents. Second and third allotments happen after — she can upgrade to a better college/course if she stays in the pool.</div></li>
+    <li><div class="step-num">7</div><div class="step-text"><strong>Apply for E-Grantz</strong> — After admission is confirmed. Go to egrantz.kerala.gov.in or nearest Akshaya Centre. Covers tuition fee if eligible.</div></li>
+    <li><div class="step-num">8</div><div class="step-text"><strong>Apply for NSP & other scholarships</strong> — From August onward once the academic year begins. Keep income certificate, caste certificate, and Aadhaar ready.</div></li>
+  </ul>
+</div>
+
+<div class="section-title">Documents needed for CAP registration</div>
+<div class="row">
+  <div class="card"><div class="card-sub">Plus Two mark sheet (original + photocopy)</div></div>
+  <div class="card"><div class="card-sub">SSLC / Class 10 certificate (for age/name proof)</div></div>
+  <div class="card"><div class="card-sub">Aadhaar card</div></div>
+  <div class="card"><div class="card-sub">Community / caste certificate (if applicable)</div></div>
+  <div class="card"><div class="card-sub">Income certificate (for scholarships)</div></div>
+  <div class="card"><div class="card-sub">Passport-size photo + scanned signature</div></div>
+  <div class="card"><div class="card-sub">Bank account number linked with Aadhaar</div></div>
+  <div class="card"><div class="card-sub">Transfer certificate (TC) from school</div></div>
+</div>
+
+<div class="section-title">Quick summary: recommended path</div>
+<div class="card" style="background: var(--color-background-secondary);">
+  <div class="step-text" style="font-size:14px; line-height:1.9;">
+    <strong>Best course:</strong> B.Com (Finance or Computer Applications) under Kannur University<br>
+    <strong>Best college type:</strong> Government aided (Brennen College, CAS Kannur, Nirmalagiri College)<br>
+    <strong>Total cost:</strong> As low as ₹2,490 for 3 years if she gets a govt college seat<br>
+    <strong>After B.Com:</strong> CA / MBA / MCom / govt bank jobs / PSC exams<br>
+    <strong>Register NOW:</strong> admission.kannuruniversity.ac.in — closes June 12, 2026
+  </div>
+</div>
+
+</div>
