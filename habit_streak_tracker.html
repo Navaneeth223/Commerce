@@ -1,0 +1,291 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.app{padding:1.5rem 1rem;max-width:680px}
+.top-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.top-bar h1{font-size:18px;font-weight:500;color:var(--color-text-primary)}
+.top-bar-right{display:flex;gap:8px;align-items:center}
+.theme-btn,.add-btn{background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:6px 12px;cursor:pointer;font-size:13px;color:var(--color-text-secondary);display:flex;align-items:center;gap:6px}
+.theme-btn:hover,.add-btn:hover{background:var(--color-background-secondary)}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:1.5rem}
+.stat-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:12px 14px}
+.stat-label{font-size:12px;color:var(--color-text-secondary);margin-bottom:4px}
+.stat-val{font-size:22px;font-weight:500;color:var(--color-text-primary)}
+.habits-list{display:flex;flex-direction:column;gap:10px}
+.habit-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px}
+.habit-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.habit-left{display:flex;align-items:center;gap:10px}
+.habit-emoji{font-size:20px;width:32px;text-align:center}
+.habit-info h3{font-size:14px;font-weight:500;color:var(--color-text-primary);margin-bottom:2px}
+.habit-info p{font-size:12px;color:var(--color-text-secondary)}
+.habit-actions{display:flex;align-items:center;gap:6px}
+.check-btn{width:34px;height:34px;border-radius:50%;border:0.5px solid var(--color-border-secondary);background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--color-text-secondary);transition:background 0.15s}
+.check-btn.done{background:#1D9E75;border-color:#1D9E75;color:#fff}
+.icon-btn{width:28px;height:28px;border-radius:var(--border-radius-md);border:none;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--color-text-secondary);font-size:15px}
+.icon-btn:hover{background:var(--color-background-secondary)}
+.heatmap{display:flex;flex-wrap:wrap;gap:3px;margin-top:10px}
+.hm-cell{width:12px;height:12px;border-radius:2px;background:var(--color-background-secondary)}
+.hm-0{background:var(--color-background-secondary)}
+.hm-1{background:#9FE1CB}
+.hm-2{background:#5DCAA5}
+.hm-3{background:#1D9E75}
+.streak-chips{display:flex;gap:8px;margin-top:8px}
+.chip{font-size:11px;padding:3px 8px;border-radius:99px;display:flex;align-items:center;gap:4px}
+.chip-green{background:#E1F5EE;color:#0F6E56}
+.chip-amber{background:#FAEEDA;color:#854F0B}
+.chip-blue{background:#E6F1FB;color:#185FA5}
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.4);display:flex;align-items:center;justify-content:center;z-index:100}
+.modal{background:var(--color-background-primary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary);padding:20px;width:320px;max-width:90vw}
+.modal h2{font-size:16px;font-weight:500;margin-bottom:14px;color:var(--color-text-primary)}
+.field{margin-bottom:12px}
+.field label{font-size:12px;color:var(--color-text-secondary);display:block;margin-bottom:4px}
+.field input,.field select{width:100%}
+.emoji-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.emoji-opt{width:32px;height:32px;border-radius:var(--border-radius-md);border:0.5px solid var(--color-border-tertiary);background:transparent;cursor:pointer;font-size:18px;display:flex;align-items:center;justify-content:center}
+.emoji-opt.sel{border-color:#1D9E75;background:#E1F5EE}
+.modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:16px}
+.btn-cancel{background:transparent;border:0.5px solid var(--color-border-secondary);border-radius:var(--border-radius-md);padding:7px 14px;cursor:pointer;font-size:13px;color:var(--color-text-secondary)}
+.btn-save{background:#1D9E75;border:none;border-radius:var(--border-radius-md);padding:7px 14px;cursor:pointer;font-size:13px;color:#fff;font-weight:500}
+.empty-state{text-align:center;padding:3rem 1rem;color:var(--color-text-secondary)}
+.empty-state i{font-size:40px;display:block;margin-bottom:12px}
+.empty-state p{font-size:14px}
+.chart-section{margin-top:1.5rem}
+.chart-title{font-size:13px;font-weight:500;color:var(--color-text-secondary);margin-bottom:8px}
+.bar-chart{display:flex;align-items:flex-end;gap:4px;height:60px}
+.bar-wrap{display:flex;flex-direction:column;align-items:center;gap:3px;flex:1}
+.bar{border-radius:3px 3px 0 0;background:#9FE1CB;min-height:2px;width:100%;transition:height 0.3s}
+.bar-label{font-size:10px;color:var(--color-text-secondary)}
+.notif-banner{background:#E1F5EE;border:0.5px solid #5DCAA5;border-radius:var(--border-radius-md);padding:8px 12px;font-size:12px;color:#0F6E56;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+.hidden{display:none}
+</style>
+
+<div class="app" id="app">
+  <h2 class="sr-only">Habit and streak tracker with heatmap and reminders</h2>
+  <div class="top-bar">
+    <h1><i class="ti ti-flame" aria-hidden="true"></i> Habit Tracker</h1>
+    <div class="top-bar-right">
+      <button class="add-btn" onclick="openAdd()"><i class="ti ti-plus" aria-hidden="true"></i> New habit</button>
+    </div>
+  </div>
+  <div id="notif-banner" class="notif-banner hidden"><i class="ti ti-bell" aria-hidden="true"></i><span id="notif-text"></span></div>
+  <div class="stats-row" id="stats-row"></div>
+  <div class="habits-list" id="habits-list"></div>
+  <div class="chart-section">
+    <div class="chart-title">Last 7 days — completions</div>
+    <div class="bar-chart" id="bar-chart"></div>
+  </div>
+</div>
+
+<div class="modal-bg hidden" id="modal-bg">
+  <div class="modal">
+    <h2 id="modal-title">Add habit</h2>
+    <div class="field">
+      <label>Name</label>
+      <input type="text" id="h-name" placeholder="e.g. Morning run" maxlength="40">
+    </div>
+    <div class="field">
+      <label>Icon</label>
+      <div class="emoji-row" id="emoji-row"></div>
+    </div>
+    <div class="field">
+      <label>Daily reminder time (optional)</label>
+      <input type="time" id="h-time">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+      <button class="btn-save" onclick="saveHabit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const EMOJIS=['🏃','💪','📚','🧘','💧','🎸','✍️','🥗','😴','🧹','💻','🎨','🌿','🏋️','🚴'];
+const TODAY=new Date().toISOString().slice(0,10);
+let habits=[],editId=null,selEmoji=EMOJIS[0];
+
+function load(){
+  try{habits=JSON.parse(localStorage.getItem('ht_habits')||'[]')}catch{habits=[]}
+}
+function save(){localStorage.setItem('ht_habits',JSON.stringify(habits))}
+
+function dateStr(offset=0){
+  const d=new Date();d.setDate(d.getDate()+offset);
+  return d.toISOString().slice(0,10);
+}
+function last7(){return Array.from({length:7},(_,i)=>dateStr(i-6))}
+function last60(){return Array.from({length:60},(_,i)=>dateStr(i-59))}
+
+function getStreak(h){
+  let streak=0,d=new Date();
+  while(true){
+    const s=d.toISOString().slice(0,10);
+    if(h.done.includes(s)){streak++;d.setDate(d.getDate()-1)}
+    else{if(s===TODAY)d.setDate(d.getDate()-1);else break;}
+    if(streak>365)break;
+  }
+  return streak;
+}
+function getBest(h){
+  if(!h.done.length)return 0;
+  const sorted=[...h.done].sort();
+  let best=1,cur=1;
+  for(let i=1;i<sorted.length;i++){
+    const a=new Date(sorted[i-1]),b=new Date(sorted[i]);
+    const diff=(b-a)/86400000;
+    if(diff===1){cur++;best=Math.max(best,cur)}else{cur=1}
+  }
+  return best;
+}
+
+function renderStats(){
+  const total=habits.length;
+  const todayDone=habits.filter(h=>h.done.includes(TODAY)).length;
+  const allStreaks=habits.map(h=>getStreak(h));
+  const maxStreak=allStreaks.length?Math.max(...allStreaks):0;
+  document.getElementById('stats-row').innerHTML=`
+    <div class="stat-card"><div class="stat-label">Today's progress</div><div class="stat-val">${todayDone}/${total}</div></div>
+    <div class="stat-card"><div class="stat-label">Best streak 🔥</div><div class="stat-val">${maxStreak} days</div></div>
+    <div class="stat-card"><div class="stat-label">Total habits</div><div class="stat-val">${total}</div></div>
+  `;
+}
+
+function renderHeatmap(h){
+  const days=last60();
+  return days.map(d=>{
+    const lvl=h.done.includes(d)?Math.min(3,1):0;
+    return `<div class="hm-cell hm-${lvl}" title="${d}"></div>`;
+  }).join('');
+}
+
+function renderHabits(){
+  const el=document.getElementById('habits-list');
+  if(!habits.length){
+    el.innerHTML=`<div class="empty-state"><i class="ti ti-sparkles" aria-hidden="true"></i><p>No habits yet. Add your first one!</p></div>`;
+    return;
+  }
+  el.innerHTML=habits.map(h=>{
+    const done=h.done.includes(TODAY);
+    const streak=getStreak(h);
+    const best=getBest(h);
+    const rate=h.done.length&&last7().filter(d=>h.done.includes(d)).length;
+    return `<div class="habit-card">
+      <div class="habit-header">
+        <div class="habit-left">
+          <div class="habit-emoji">${h.emoji}</div>
+          <div class="habit-info">
+            <h3>${h.name}</h3>
+            <p>${h.reminder?'Reminder: '+h.reminder:'No reminder set'}</p>
+          </div>
+        </div>
+        <div class="habit-actions">
+          <button class="icon-btn" onclick="editHabit('${h.id}')" aria-label="Edit"><i class="ti ti-edit" aria-hidden="true"></i></button>
+          <button class="icon-btn" onclick="deleteHabit('${h.id}')" aria-label="Delete"><i class="ti ti-trash" aria-hidden="true"></i></button>
+          <button class="check-btn${done?' done':''}" onclick="toggleDone('${h.id}')" aria-label="${done?'Unmark':'Mark done'}">
+            <i class="ti ti-check" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+      <div class="streak-chips">
+        <span class="chip chip-green"><i class="ti ti-flame"></i>${streak} day streak</span>
+        <span class="chip chip-amber"><i class="ti ti-trophy"></i>Best: ${best}</span>
+        <span class="chip chip-blue"><i class="ti ti-calendar-week"></i>${rate}/7 this week</span>
+      </div>
+      <div class="heatmap" aria-label="60-day activity heatmap">${renderHeatmap(h)}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderChart(){
+  const days=last7();
+  const max=Math.max(1,...days.map(d=>habits.filter(h=>h.done.includes(d)).length));
+  document.getElementById('bar-chart').innerHTML=days.map(d=>{
+    const count=habits.filter(h=>h.done.includes(d)).length;
+    const pct=Math.round((count/max)*100);
+    const label=['Su','Mo','Tu','We','Th','Fr','Sa'][new Date(d+'T00:00:00').getDay()];
+    const isToday=d===TODAY;
+    return `<div class="bar-wrap">
+      <div class="bar" style="height:${pct}%;background:${isToday?'#1D9E75':'#9FE1CB'}" aria-label="${count} completions"></div>
+      <div class="bar-label" style="color:${isToday?'var(--color-text-primary)':'var(--color-text-secondary)'}">${label}</div>
+    </div>`;
+  }).join('');
+}
+
+function render(){renderStats();renderHabits();renderChart()}
+
+function toggleDone(id){
+  const h=habits.find(x=>x.id===id);
+  if(!h)return;
+  if(h.done.includes(TODAY))h.done=h.done.filter(d=>d!==TODAY);
+  else h.done.push(TODAY);
+  save();render();
+}
+function deleteHabit(id){
+  habits=habits.filter(x=>x.id!==id);
+  save();render();
+}
+
+function openAdd(){
+  editId=null;selEmoji=EMOJIS[0];
+  document.getElementById('h-name').value='';
+  document.getElementById('h-time').value='';
+  document.getElementById('modal-title').textContent='Add habit';
+  renderEmojiRow();
+  document.getElementById('modal-bg').classList.remove('hidden');
+  setTimeout(()=>document.getElementById('h-name').focus(),100);
+}
+function editHabit(id){
+  const h=habits.find(x=>x.id===id);if(!h)return;
+  editId=id;selEmoji=h.emoji;
+  document.getElementById('h-name').value=h.name;
+  document.getElementById('h-time').value=h.reminder||'';
+  document.getElementById('modal-title').textContent='Edit habit';
+  renderEmojiRow();
+  document.getElementById('modal-bg').classList.remove('hidden');
+}
+function closeModal(){document.getElementById('modal-bg').classList.add('hidden')}
+
+function renderEmojiRow(){
+  document.getElementById('emoji-row').innerHTML=EMOJIS.map(e=>`<button class="emoji-opt${e===selEmoji?' sel':''}" onclick="pickEmoji('${e}')" aria-label="${e}">${e}</button>`).join('');
+}
+function pickEmoji(e){selEmoji=e;renderEmojiRow()}
+
+function saveHabit(){
+  const name=document.getElementById('h-name').value.trim();
+  if(!name)return;
+  const reminder=document.getElementById('h-time').value;
+  if(editId){
+    const h=habits.find(x=>x.id===editId);
+    if(h){h.name=name;h.emoji=selEmoji;h.reminder=reminder}
+  }else{
+    habits.push({id:Date.now().toString(),name,emoji:selEmoji,reminder,done:[]});
+  }
+  save();closeModal();render();
+}
+
+function checkReminders(){
+  const now=new Date();
+  const hhmm=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
+  habits.forEach(h=>{
+    if(h.reminder===hhmm&&!h.done.includes(TODAY)){
+      if(Notification.permission==='granted'){
+        new Notification('Habit Tracker',{body:`Time for: ${h.emoji} ${h.name}`,icon:'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🔥</text></svg>'});
+      }
+      const banner=document.getElementById('notif-banner');
+      document.getElementById('notif-text').textContent=`Reminder: ${h.emoji} ${h.name}`;
+      banner.classList.remove('hidden');
+      setTimeout(()=>banner.classList.add('hidden'),5000);
+    }
+  });
+}
+
+if(Notification.permission==='default'){
+  Notification.requestPermission();
+}
+setInterval(checkReminders,30000);
+
+document.getElementById('modal-bg').addEventListener('click',function(e){if(e.target===this)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+
+load();render();
+</script>
